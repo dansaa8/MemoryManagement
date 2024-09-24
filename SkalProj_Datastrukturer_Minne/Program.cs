@@ -10,10 +10,10 @@ namespace SkalProj_Datastrukturer_Minne
         /// <param name="args"></param>
         static void Main()
         {
-
             while (true)
             {
-                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                Console.WriteLine(
+                    "Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
@@ -29,6 +29,7 @@ namespace SkalProj_Datastrukturer_Minne
                     Console.Clear();
                     Console.WriteLine("Please enter some input!");
                 }
+
                 switch (input)
                 {
                     case '1':
@@ -44,7 +45,7 @@ namespace SkalProj_Datastrukturer_Minne
                         CheckParanthesis();
                         break;
                     /*
-                     * Extend the menu to include the recursive 
+                     * Extend the menu to include the recursive
                      * and iterative exercises.
                      */
                     case '0':
@@ -62,22 +63,128 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineList()
         {
-            /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch statement with cases '+' and '-'
-             * '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
-             * '-': Remove the rest of the input from the list (The user could write -Adam and "Adam" would be removed from the list)
-             * In both cases, look at the count and capacity of the list
-             * As a default case, tell them to use only + or -
-             * Below you can see some inspirational code to begin working.
-            */
+            // Fråga: När ökar listans kapacitet? (Alltså den underliggande arrayens storlek)
+            // Svar: När man utgår från en tom lista, så ökar kapaticteten när antalet element i arrayen
+            // överskrider 4. 
+            
+            // Fråga: Med hur mycket ökar kapaciteten?
+            // Svar: Kapaciteten ökar dubbelt när varje kapacitets gräns är nådd.
+            // När antalet element i kommer upp i 5, så blir kapaticteten 8. 
+            // När antalet element kommer upp i 9, så blir kapaciteten 16. 
+            // Sen så blir det 32, 64 osv...
+            
+            // Fråga: Varför ökar inte listans kapacitet i samma takt som element läggs till?
+            // Svar: Anledningen till att en listas kapacitet inte ökar i samma takt som ett element
+            // läggs till är pga. prestandaskäl. Istället för att en ny array behöver skapas samt kopiera
+            // över referenserna till strängarna(från gamla arrayen)
+            // varje gång en ny sträng läggs till i Listan, så behöver denna operation endast
+            // göras när kapacitetsgränsen överskrids.
+            
+            // Fråga: Minskar kapaciteten när element tas bort ur listan?
+            // Nej, kapaciten tycks inte minska när ett element tas bort ur listan, vilket kan demonstreras
+            // med denna metod
+            
+            // Fråga: När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
+            // När vi på förhand vet exakt hur många element som arrayen kommer behöva. T.ex om man skapar
+            // ett schackspel eller liknande, där antalet rektanglar som man kan röra sig på alltid är densamma.
+            // Kanske även om man skapar en DTO eller liknande, efter att ha hämtat ut en lista från en databas
+            // och sedan ska transportera den listan till en Endpoint.
+            // Men även när en lista skapas dynamiskt i koden och där vi inte förväntar oss att arrayen
+            // kommer att öka under körningens gång.
+            
+            
+            
+            List<string> theList = new List<string>();
+            bool subMenuRunning = true;
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            while (subMenuRunning)
+            {
+                Console.WriteLine("Available Actions:" +
+                                  "\n+<Value> : Add the value to the list" +
+                                  "\n-<Value> : Remove the value from the list" +
+                                  "\ne : Exit to main menu");
 
-            //switch(nav){...}
+                string input = Console.ReadLine();
+
+                if (String.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Please enter valid input.");
+                }
+                else
+                {
+                    switch (input[0])
+                    {
+                        case '+':
+                            if (input.Length > 1)
+                            {
+                                string trimmedInput = input.Substring(1).Trim();
+                                if (trimmedInput.Length == 0)
+                                {
+                                    Console.WriteLine("Please enter a valid value after the + sign.");
+                                }
+                                else
+                                {
+                                    if (theList.Contains(trimmedInput))
+                                    {
+                                        Console.WriteLine(
+                                            "The input already exists in the list, please add a unique value.");
+                                    }
+                                    else
+                                    {
+                                        theList.Add(trimmedInput);
+                                        Console.WriteLine($"\"{trimmedInput}\" added to the list.");
+                                        Console.WriteLine($"Current List capacity: {theList.Capacity}");
+                                        Console.WriteLine($"Current List count: {theList.Count}");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please enter a value to add.");
+                            }
+
+                            break;
+
+                        case '-':
+                            if (input.Length > 1)
+                            {
+                                string trimmedInput = input.Substring(1).Trim();
+                                if (trimmedInput.Length == 0)
+                                {
+                                    Console.WriteLine("Please enter a valid value after the - sign.");
+                                }
+                                else
+                                {
+                                    if (theList.Remove(trimmedInput))
+                                    {
+                                        Console.WriteLine($"\"{trimmedInput}\" removed from the list.");
+                                        Console.WriteLine($"Current List capacity: {theList.Capacity}");
+                                        Console.WriteLine($"Current List count: {theList.Count}");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Input not found in the list, nothing was removed.");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please enter a value to remove.");
+                            }
+
+                            break;
+
+                        case 'e':
+                            subMenuRunning = false; // Exit the loop
+                            Console.WriteLine("Exiting to main menu.");
+                            break;
+
+                        default:
+                            Console.WriteLine("Invalid choice, please try again.");
+                            break;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -89,7 +196,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Loop this method untill the user inputs something to exit to main menue.
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
-            */
+             */
         }
 
         /// <summary>
@@ -101,7 +208,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Loop this method until the user inputs something to exit to main menue.
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
-            */
+             */
         }
 
         static void CheckParanthesis()
@@ -111,9 +218,6 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
-
         }
-
     }
 }
-
