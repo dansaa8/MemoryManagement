@@ -34,20 +34,20 @@ public static class ExamineQueue
                     case "e":
                     {
                         string queueString = Util.AskForString("string to queue");
-                        Console.WriteLine($"The queue before Enqueue: {Util.ConvertQueueToString(theQueue)}");
+                        Console.WriteLine($"The queue before Enqueue: {Util.ConvertCollectionToString(theQueue)}");
 
                         theQueue.Enqueue(queueString);
-                        Console.WriteLine($"The queue after Enqueue: {Util.ConvertQueueToString(theQueue)}");
+                        Console.WriteLine($"The queue after Enqueue: {Util.ConvertCollectionToString(theQueue)}");
                     }
                         break;
                     case "d":
                     {
                         if (theQueue.Count > 0)
                         {
-                            Console.WriteLine($"The queue before Dequeue: {Util.ConvertQueueToString(theQueue)}");
+                            Console.WriteLine($"The queue before Dequeue: {Util.ConvertCollectionToString(theQueue)}");
 
                             theQueue.Dequeue();
-                            Console.WriteLine($"The queue after Dequeue: {Util.ConvertQueueToString(theQueue)}");
+                            Console.WriteLine($"The queue after Dequeue: {Util.ConvertCollectionToString(theQueue)}");
                         }
                         else
                         {
