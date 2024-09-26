@@ -92,11 +92,11 @@ public static class Util
                 // Vi kollar om det för närvarande finns några element i stacken.
                 // Om det inte gör det så betyder det att vi har en stängande
                 // parentes som inte har en startande motsvarighet.
-                if (stack.Count == 0) return false; 
+                if (stack.Count == 0) return false;
 
                 // Vi plockar ut den senast tillagda öppnande parentesen ur stacken.
                 char top = stack.Pop();
-                
+
                 // Om den senast tillagda öppnande parentesen i stacken inte motsvarar
                 // den stängande parentesen, så betyder det att det finns
                 // en öppnande parentes av en annan typ som inte är stängd.
@@ -115,4 +115,9 @@ public static class Util
         return stack.Count == 0;
     }
 
+    public static int RecursiveOdd(int n)
+    {
+        if (n == 1) return 1;
+        return (RecursiveOdd(n - 1) + 2);
+    }
 }
