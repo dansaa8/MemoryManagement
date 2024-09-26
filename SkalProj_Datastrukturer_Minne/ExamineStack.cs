@@ -1,3 +1,5 @@
+using System.Collections;
+
 namespace SkalProj_Datastrukturer_Minne;
 
 /// <summary>
@@ -15,13 +17,10 @@ public static class ExamineStack
 
         bool isRunning = true;
 
-        Stack<string> theStack = new Stack<string>();
-
         while (isRunning)
         {
             Console.WriteLine("Available Actions:" +
-                              "\npush: Insert a string at the top of the Stack." +
-                              "\npop: Remove and return the string at the top of the Stack." +
+                              "\ne: enter a string that will be reversed" +
                               "\n0 : Exit to main menu");
 
             string input = Console.ReadLine().ToLower();
@@ -34,29 +33,17 @@ public static class ExamineStack
             {
                 switch (input)
                 {
-                    case "push":
+                    case "e":
                     {
-                        string stackString = Util.AskForString("string to stack");
-                        Console.WriteLine($"The stack before push: {Util.ConvertCollectionToString(theStack)}");
+                        string baseString = Util.AskForString("string to stack");
 
-                        theStack.Push(stackString);
-                        Console.WriteLine($"The stack after push: {Util.ConvertCollectionToString(theStack)}");
-                    }
-                        break;
-                    case "pop":
-                    {
-                        if (theStack.Count > 0)
-                        {
-                            Console.WriteLine($"The stack before pop: {Util.ConvertCollectionToString(theStack)}");
+                        // Simulate a how a stack works with Stack Class:
+                        Console.WriteLine("With Stack Class: " + Util.ReverseStringWithStackClass(baseString));
 
-                            theStack.Pop();
-                            Console.WriteLine($"The stack after pop: {Util.ConvertCollectionToString(theStack)}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("The stack is empty. Nothing to pop");
-                        }
+                        // Actual stack with recursive method:
+                        Console.WriteLine("With real recursion: " + Util.ReverseStringRecursively(baseString));
                     }
+
                         break;
                     case "0":
                         isRunning = false;
