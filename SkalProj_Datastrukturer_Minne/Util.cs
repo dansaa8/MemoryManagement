@@ -120,4 +120,10 @@ public static class Util
         if (n == 1) return 1;
         return (RecursiveOdd(n - 1) + 2);
     }
+
+    public static int RecursiveEven(int n)
+    {
+        if (n == 0) return 0;
+        return (RecursiveEven(n - 1) + 2);
+    }
 }
