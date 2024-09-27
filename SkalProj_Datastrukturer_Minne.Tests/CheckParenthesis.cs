@@ -9,7 +9,7 @@ public class CheckParenthesis
         string testString = "[hej()]";
 
         // Act
-        bool result = Util.CheckParenthesis(testString);
+        bool result = Util.IsWellFormated(testString);
 
         // Assert
         Assert.True(result);
@@ -22,7 +22,7 @@ public class CheckParenthesis
         string testString = "([{}]({}))";
 
         // Act
-        bool result = Util.CheckParenthesis(testString);
+        bool result = Util.IsWellFormated(testString);
 
         // Assert
         Assert.True(result);
@@ -35,7 +35,7 @@ public class CheckParenthesis
         string testString = "List<int> lista = new List<int>(){2, 3, 4};";
 
         // Act
-        bool result = Util.CheckParenthesis(testString);
+        bool result = Util.IsWellFormated(testString);
 
         // Assert
         Assert.True(result);
@@ -48,7 +48,7 @@ public class CheckParenthesis
         string testString = "([)hej()]";
 
         // Act
-        bool result = Util.CheckParenthesis(testString);
+        bool result = Util.IsWellFormated(testString);
 
         // Assert
         Assert.False(result);
@@ -61,7 +61,7 @@ public class CheckParenthesis
         string testString = "({)}";
 
         // Act
-        bool result = Util.CheckParenthesis(testString);
+        bool result = Util.IsWellFormated(testString);
 
         // Assert
         Assert.False(result);

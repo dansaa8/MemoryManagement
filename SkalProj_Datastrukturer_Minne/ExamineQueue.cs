@@ -1,5 +1,8 @@
 namespace SkalProj_Datastrukturer_Minne;
 
+/// <summary>
+/// Examines the datastructure Queue
+/// </summary>
 public static class ExamineQueue
 {
     public static void Run()

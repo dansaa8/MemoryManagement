@@ -1,5 +1,8 @@
 namespace SkalProj_Datastrukturer_Minne;
 
+/// <summary>
+/// Examines the datastructure List
+/// </summary>
 public static class ExamineList
 {
     internal static void Run()

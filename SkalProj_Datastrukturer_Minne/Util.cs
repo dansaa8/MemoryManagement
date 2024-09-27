@@ -74,7 +74,7 @@ public static class Util
         return input;
     }
 
-    public static bool CheckParenthesis(string baseString)
+    public static bool IsWellFormated(string baseString)
     {
         Stack<char> stack = new();
 
