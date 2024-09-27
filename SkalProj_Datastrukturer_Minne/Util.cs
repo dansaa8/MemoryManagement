@@ -126,4 +126,50 @@ public static class Util
         if (n == 0) return 0;
         return (RecursiveEven(n - 1) + 2);
     }
+
+
+    // 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144...
+    public static int RecursiveFibonacci(int count)
+    {
+        if (count == 0) return 0;
+        if (count == 1 || count == 2) return 1;
+        return RecursiveFibonacci(count - 1) + RecursiveFibonacci(count - 2);
+    }
+
+    public static int IterativeOdd(int n)
+    {
+        int result = 1;
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            result += 2;
+        }
+
+        return result;
+    }
+
+    public static int IterativeEven(int n)
+    {
+        int result = 2;
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            result += 2;
+        }
+
+        return result;
+    }
+
+    public static List<int> IterativeFibonacci(int count)
+    {
+        List<int> result = new();
+        if (count == 0) return result;
+        for (int i = 0; i < count; i++)
+        {
+            if (i == 0 || i == 1) result.Add(1);
+            else result.Add(result[i - 1] + result[i - 2]);
+        }
+
+        return result;
+    }
 }
